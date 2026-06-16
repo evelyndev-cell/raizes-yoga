@@ -78,9 +78,9 @@ input{font-family:inherit;border:none;outline:none}
 .hero-dots{position:absolute;right:1.4rem;top:50%;transform:translateY(-50%);z-index:3;display:flex;flex-direction:column;gap:.4rem}
 .hero-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:all .3s}
 .hero-dot.active{background:var(--white);height:18px;border-radius:3px}
-.hero-content{background:var(--bark);display:flex;flex-direction:column;padding:0 3.5rem;position:relative;overflow:hidden}
+.hero-content{background:var(--bark);display:flex;flex-direction:column;padding:0 3.5rem;position:relative;overflow:hidden;min-height:100%}
 .hero-content::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 15%,rgba(107,127,88,.15) 0%,transparent 55%)}
-.hero-inner{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:center;padding-bottom:5rem}
+.hero-inner{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:center;padding:2rem 0 6rem}
 .hero-eyebrow{font-size:.6rem;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--sage);margin-bottom:1.5rem;display:flex;align-items:center;gap:.7rem}
 .hero-eyebrow::before{content:"";width:28px;height:1px;background:var(--sage);display:block}
 .hero-title{font-family:var(--ff-d);font-weight:400;color:var(--white);margin-bottom:1.4rem;font-size:clamp(2.6rem,3.8vw,4rem);line-height:1.08}
@@ -447,41 +447,220 @@ footer{background:var(--bark);padding:2.75rem 3rem 1.75rem}
 .toast i{color:var(--sage);font-size:.95rem}
 
 /* ── RESPONSIVE ───────────────────────── */
+/* ── TABLET (≤1100px) ─────────────────── */
 @media(max-width:1100px){
-  .hero{grid-template-columns:1fr}
-  .hero-carousel{height:55vw;min-height:300px}
-  .hero-content{padding:2.5rem 2rem 4.5rem}
-  .hero-inner{padding-bottom:4.5rem}
-  .hero-stats{padding:1.1rem 2rem;gap:1.75rem}
+  .nav{padding:0 1.5rem}
+  .section{padding:4rem 1.5rem}
+  .difs{padding:3.5rem 1.5rem}
+  .deps{padding:3.5rem 1.5rem}
+  .faq-sec{padding:3.5rem 1.5rem}
+  .nl{padding:3.5rem 1.5rem}
+  footer{padding:2.5rem 1.5rem 1.5rem}
+
+  /* Hero: empilha carousel em cima, conteúdo embaixo */
+  .hero{
+    grid-template-columns:1fr;
+    height:auto;
+    min-height:unset;
+  }
+  .hero-carousel{
+    height:56vw;
+    min-height:260px;
+    max-height:420px;
+  }
+  /* No tablet o conteúdo ocupa altura natural — sem absolute nas stats */
+  .hero-content{
+    position:relative;
+    padding:0;
+    min-height:auto;
+    overflow:visible;
+  }
+  .hero-inner{
+    padding:2rem 2rem 1.5rem;
+    flex:unset;
+    justify-content:flex-start;
+  }
+  /* Stats deixam de ser absolute — voltam ao fluxo normal */
+  .hero-stats{
+    position:static;
+    background:rgba(42,30,20,.8);
+    padding:1.1rem 2rem;
+    gap:2rem;
+    border-top:1px solid rgba(255,255,255,.1);
+  }
+
   .products-grid{grid-template-columns:1fr 1fr}
   .card-featured{grid-row:auto}
   .card-featured .card-img-wrap{height:220px;flex:unset}
   .sobre{grid-template-columns:1fr}
-  .sobre-photo{height:340px}
+  .sobre-photo{height:300px}
+  .sobre-content{padding:3rem 2rem}
   .difs-grid{grid-template-columns:repeat(2,1fr)}
   .deps-grid{grid-template-columns:repeat(2,1fr)}
   .nl{grid-template-columns:1fr;gap:2rem}
+  .nl-photo{height:240px}
   .footer-top{grid-template-columns:1fr 1fr}
-  .nav{padding:0 1.5rem}
-  .section{padding:4rem 1.5rem}
-  .trust-bar{gap:1.25rem;padding:.8rem 1.5rem}
+  .trust-bar{gap:1.25rem;padding:.8rem 1.5rem;flex-wrap:wrap}
   .trust-div{display:none}
   .pmodal{grid-template-columns:1fr;max-width:480px}
-  .pmodal-info{max-height:60vh}
+  .pmodal-gallery{min-height:280px}
+  .pmodal-main-img{min-height:260px}
+  .pmodal-info{max-height:55vh}
 }
-@media(max-width:660px){
+
+/* ── MOBILE (≤520px) ─────────────────── */
+@media(max-width:520px){
+  /* Nav */
+  .nav{padding:0 1rem;height:60px}
   .nav-links{display:none}
+  .nav-logo{font-size:1.35rem}
+
+  /* Hero carousel menor */
+  .hero-carousel{
+    height:68vw;
+    min-height:220px;
+    max-height:340px;
+  }
+  .hero-eco-badge{
+    top:1rem;left:1rem;
+    padding:.55rem .8rem;
+  }
+  .hero-eco-badge i{font-size:1rem}
+  .hero-eco-badge .eb-val{font-size:.68rem}
+
+  .slide-label{padding:1rem 1.25rem}
+  .slide-label-name{font-size:.9rem}
+  .slide-label-price{font-size:.85rem}
+  .slide-label-btn{font-size:.54rem;padding:.35rem .7rem}
+
+  /* Hero content — padding generoso para respirar */
+  .hero-inner{
+    padding:1.75rem 1.25rem 1.5rem;
+  }
+  .hero-eyebrow{
+    font-size:.55rem;
+    margin-bottom:1rem;
+  }
+  .hero-eyebrow::before{width:20px}
+
+  /* Título mobile — tamanho fixo seguro */
+  .hero-title{
+    font-size:2.1rem;
+    line-height:1.1;
+    margin-bottom:1rem;
+  }
+  .hero-title .accent{
+    font-size:1.85rem;
+    line-height:1.15;
+  }
+
+  .hero-desc{
+    font-size:.78rem;
+    max-width:100%;
+    margin-bottom:1.5rem;
+    line-height:1.72;
+  }
+  .hero-ctas{
+    max-width:100%;
+    gap:.55rem;
+  }
+  .hero-ctas .btn{
+    padding:.78rem 1.5rem;
+    font-size:.65rem;
+    justify-content:center;
+  }
+
+  /* Stats — 3 colunas lado a lado no mobile */
+  .hero-stats{
+    padding:.85rem 1.25rem;
+    gap:0;
+    justify-content:space-around;
+    flex-wrap:nowrap;
+  }
+  .hero-stat h4{font-size:1.15rem}
+  .hero-stat p{font-size:.5rem}
+
+  /* Trust bar empilhado */
+  .trust-bar{
+    flex-direction:column;
+    gap:.55rem;
+    padding:1rem 1.25rem;
+    align-items:flex-start;
+  }
+  .trust-item{font-size:.62rem}
+
+  /* Produtos 1 coluna */
+  .section{padding:3rem 1rem}
   .products-grid{grid-template-columns:1fr}
-  .difs-grid{grid-template-columns:1fr}
+  .card-img-wrap{height:200px}
+  .card-body{padding:.85rem .95rem 1.1rem}
+  .card-name{font-size:.85rem}
+  .card-desc{font-size:.73rem}
+  .card-price{font-size:.95rem}
+  .add-btn{font-size:.58rem;padding:.42rem .85rem}
+
+  /* Sobre */
+  .sobre-photo{height:250px}
+  .sobre-content{padding:2.25rem 1.25rem}
+  .sobre-content .title-xl{font-size:1.75rem}
+  .sobre-content p{font-size:.8rem}
+
+  /* Difs */
+  .difs{padding:3rem 1rem}
+  .difs-grid{grid-template-columns:1fr 1fr}
+  .dif-item{padding:1.1rem .7rem}
+  .dif-item h4{font-size:.68rem}
+  .dif-item p{font-size:.62rem}
+
+  /* Depoimentos */
+  .deps{padding:3rem 1rem}
   .deps-grid{grid-template-columns:1fr}
+  .dep-card{padding:1.1rem}
+  .dep-text{font-size:.74rem}
+
+  /* FAQ */
+  .faq-sec{padding:3rem 1rem}
   .faq-grid{grid-template-columns:1fr}
-  .form-row{grid-template-columns:1fr}
-  .footer-top{grid-template-columns:1fr}
-  .hero-stats{flex-wrap:wrap;gap:1.1rem}
+  .faq-q{font-size:.76rem;padding:.9rem 1rem}
+  .faq-a{font-size:.72rem}
+
+  /* Newsletter */
+  .nl{padding:3rem 1rem;gap:1.5rem}
+  .nl-photo{height:200px}
+  .nl .title-xl{font-size:1.75rem}
+  .nl p{font-size:.8rem}
+  .nl-form input{font-size:.75rem;padding:.7rem .9rem}
+  .nl-form button{font-size:.58rem;padding:.7rem 1rem}
+
+  /* Footer */
+  footer{padding:2rem 1rem 1.25rem}
+  .footer-top{grid-template-columns:1fr;gap:1.75rem}
+  .footer-bottom{flex-direction:column;gap:.75rem;align-items:flex-start}
+
+  /* Carrinho */
   .cart-drawer{width:100%;right:-100%}
+  .cart-hdr h3{font-size:1.15rem}
+
+  /* Checkout */
   .chk-modal{max-height:100vh;border-radius:0}
-  .pmodal{max-width:100%;border-radius:0;max-height:100vh}
-  .pmodal-info{max-height:50vh}
+  .form-row{grid-template-columns:1fr}
+  .pay-methods{grid-template-columns:1fr 1fr 1fr}
+
+  /* Product modal */
+  .pmodal{
+    max-width:100%;
+    border-radius:0;
+    max-height:100vh;
+    grid-template-columns:1fr;
+  }
+  .pmodal-gallery{min-height:220px}
+  .pmodal-main-img{min-height:200px}
+  .pmodal-info{
+    max-height:52vh;
+    padding:1.25rem 1.25rem 1rem;
+  }
+  .pmodal-name{font-size:1.35rem}
+  .pmodal-price{font-size:1.6rem}
 }
 </style>
 </head>
